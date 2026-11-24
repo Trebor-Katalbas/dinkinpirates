@@ -1,0 +1,444 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  /* Poster palette (club schedule poster + logo). Legacy names map onto it:
+     sea-deep = umber table band, sea-teal = logo maroon, treasure-gold = skull-coin gold. */
+  --color-umber: #2b1e1a;
+  --color-maroon: #7b1e2e;
+  --color-coin: #e2a11b;
+  --color-sepia: #d8c4a2;
+  --color-paper: #fce6c3;
+  --color-scorch: #8b5a2b;
+  --color-parchment: #f6e1ba;
+  --color-sea-deep: #2b1e1a;
+  --color-sea-teal: #7b1e2e;
+  --color-treasure-gold: #e2a11b;
+  --color-bounty-red: #b3261e;
+  --color-ink: #1e1714;
+  --font-display: var(--font-anton);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-anton);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  --background: #ddc9a6;
+  --foreground: #1e1714;
+  --card: #fce6c3;
+  --card-foreground: #1e1714;
+  --popover: #fdebcd;
+  --popover-foreground: #1e1714;
+  --primary: #2b1e1a;
+  --primary-foreground: #fce6c3;
+  --secondary: #e2a11b;
+  --secondary-foreground: #2b1e1a;
+  --muted: #ecd3a6;
+  --muted-foreground: #5c4632;
+  --accent: #7b1e2e;
+  --accent-foreground: #fce6c3;
+  --destructive: #b3261e;
+  --border: #c9a774;
+  --input: #c9a774;
+  --ring: #e2a11b;
+  --chart-1: #2b1e1a;
+  --chart-2: #e2a11b;
+  --chart-3: #7b1e2e;
+  --chart-4: #8b5a2b;
+  --chart-5: #c08a4a;
+  --radius: 0.5rem;
+  --sidebar: #f6e1ba;
+  --sidebar-foreground: #1e1714;
+  --sidebar-primary: #2b1e1a;
+  --sidebar-primary-foreground: #fce6c3;
+  --sidebar-accent: #ecd3a6;
+  --sidebar-accent-foreground: #1e1714;
+  --sidebar-border: #c9a774;
+  --sidebar-ring: #e2a11b;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    cursor: pointer;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+
+/* Torn, scorched scroll paper — the poster's schedule sheet. */
+@utility paper {
+  background-color: var(--color-paper);
+  background-image:
+    radial-gradient(ellipse at 50% 40%, transparent 55%, rgb(139 90 43 / 0.28) 100%),
+    linear-gradient(180deg, rgb(255 250 238 / 0.5), transparent 40%);
+  box-shadow:
+    inset 0 0 0 1px rgb(139 90 43 / 0.25),
+    inset 0 0 28px rgb(139 90 43 / 0.35);
+}
+@utility paper-torn {
+  clip-path: polygon(
+    0% 2.5%,
+    4% 0.8%,
+    9% 2.2%,
+    14% 0.3%,
+    20% 1.9%,
+    26% 0.6%,
+    31% 2.4%,
+    37% 0.2%,
+    43% 1.6%,
+    49% 0.5%,
+    55% 2.1%,
+    61% 0.4%,
+    66% 1.8%,
+    72% 0.2%,
+    78% 2.3%,
+    84% 0.7%,
+    90% 2%,
+    95% 0.4%,
+    100% 1.9%,
+    99.4% 20%,
+    100% 45%,
+    99.2% 70%,
+    100% 98%,
+    95% 99.5%,
+    89% 98.1%,
+    83% 99.8%,
+    77% 98.3%,
+    71% 99.6%,
+    65% 97.9%,
+    59% 99.7%,
+    53% 98.4%,
+    47% 99.9%,
+    41% 98.2%,
+    35% 99.5%,
+    29% 97.8%,
+    23% 99.6%,
+    17% 98.3%,
+    11% 99.8%,
+    6% 98.1%,
+    0% 99.4%,
+    0.7% 75%,
+    0% 50%,
+    0.8% 25%
+  );
+}
+
+/* ---- Grand Line utilities ----
+   Everything decorative is CSS (no images): cheap to paint, no extra requests.
+   Heavier layers (halftone, speed lines, scorch) only apply on md+ screens and when
+   the user hasn't asked for reduced data/motion. */
+@layer components {
+  /* Page backdrop: sepia like the poster's manga collage. Flat colour on phones. */
+  .parchment {
+    background-color: var(--color-sepia);
+  }
+  @media (min-width: 768px) and (not (prefers-reduced-data: reduce)) {
+    .parchment {
+      background-image:
+        radial-gradient(circle at 1px 1px, rgb(43 30 26 / 0.14) 1px, transparent 1.6px),
+        radial-gradient(ellipse at 15% 0%, rgb(255 244 222 / 0.55), transparent 60%),
+        radial-gradient(ellipse at 90% 100%, rgb(139 90 43 / 0.25), transparent 55%);
+      background-size:
+        6px 6px,
+        100% 100%,
+        100% 100%;
+    }
+  }
+
+  /* Poster schedule table: umber header band, cream cells. */
+  .poster-table {
+    @apply w-full border-collapse overflow-hidden text-center;
+  }
+  .poster-table th {
+    @apply bg-umber px-3 py-3 text-sm font-extrabold tracking-wide text-paper uppercase;
+  }
+  .poster-table td {
+    @apply border border-scorch/25 bg-paper/80 px-3 py-3 font-bold text-ink;
+  }
+
+  .wanted-poster {
+    @apply paper paper-torn relative px-6 pt-8 pb-7;
+  }
+
+  /* Anime title card: heavy condensed caps with an offset ink shadow. */
+  .manga-title {
+    font-family: var(--font-anton), sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    line-height: 0.92;
+    color: var(--color-umber);
+    text-shadow:
+      3px 3px 0 var(--color-coin),
+      5px 5px 0 rgb(43 30 26 / 0.35);
+  }
+
+  /* Comic burst sticker (e.g. "DINK!"). */
+  .burst {
+    clip-path: polygon(
+      50% 0%,
+      61% 18%,
+      80% 6%,
+      78% 28%,
+      100% 30%,
+      84% 47%,
+      98% 66%,
+      76% 68%,
+      79% 92%,
+      60% 80%,
+      50% 100%,
+      40% 80%,
+      21% 92%,
+      24% 68%,
+      2% 66%,
+      16% 47%,
+      0% 30%,
+      22% 28%,
+      20% 6%,
+      39% 18%
+    );
+  }
+
+  .wave-divider {
+    height: 18px;
+    background: radial-gradient(circle at 9px -3px, transparent 10px, var(--color-umber) 11px)
+      repeat-x;
+    background-size: 18px 18px;
+    opacity: 0.35;
+  }
+  .tap {
+    @apply min-h-11 min-w-11;
+  }
+}
+
+/* Anime speed lines behind the hero. Desktop only; rotation is a composited transform. */
+.speed-lines {
+  display: none;
+}
+@media (min-width: 768px) and (not (prefers-reduced-data: reduce)) {
+  .speed-lines {
+    display: block;
+    position: absolute;
+    inset: -50%;
+    background: repeating-conic-gradient(
+      from 0deg at 50% 50%,
+      rgb(43 30 26 / 0.08) 0deg 2deg,
+      transparent 2deg 9deg
+    );
+    -webkit-mask-image: radial-gradient(circle at center, transparent 18%, #000 60%);
+    mask-image: radial-gradient(circle at center, transparent 18%, #000 60%);
+    will-change: transform;
+  }
+}
+@media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+  .speed-lines {
+    animation: dp-spin 90s linear infinite;
+  }
+  .spin-slow {
+    animation: dp-spin 40s linear infinite;
+  }
+  .pop-in {
+    animation: dp-pop 0.5s cubic-bezier(0.2, 1.6, 0.4, 1) 0.6s both;
+  }
+}
+@keyframes dp-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes dp-pop {
+  from {
+    transform: scale(0) rotate(-20deg);
+    opacity: 0;
+  }
+}
+
+/* Scroll-in reveal using CSS scroll-driven animations (compositor only, no JS).
+   Browsers without support, and reduced-motion users, simply see the content. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: dp-reveal cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 60%;
+    }
+  }
+}
+@keyframes dp-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}
+
+/* Booking calendar availability markers (react-day-picker modifiers). */
+.dp-day-limited button {
+  position: relative;
+}
+.dp-day-limited button::after {
+  content: '';
+  position: absolute;
+  bottom: 3px;
+  left: 50%;
+  width: 14px;
+  height: 3px;
+  margin-left: -7px;
+  border-radius: 9999px;
+  background: var(--color-treasure-gold);
+}
+.dp-day-full button {
+  text-decoration: line-through;
+  color: rgb(179 38 30 / 0.6);
+}
+
+/* ---- Scroll animations ----
+   All use CSS scroll-driven animations (animation-timeline), which run on the compositor:
+   no scroll listeners, cheap on phones. Unsupported browsers and reduced-motion users get
+   the static page. */
+.scroll-progress {
+  display: none;
+}
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* Gold reading-progress rope under the header. */
+    .scroll-progress {
+      display: block;
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -4px;
+      height: 4px;
+      transform-origin: 0 50%;
+      background: linear-gradient(90deg, var(--color-treasure-gold), var(--color-maroon));
+      animation: dp-grow linear both;
+      animation-timeline: scroll(root);
+    }
+    /* Hero copy drifts up and fades as the hero scrolls away. */
+    .hero-exit {
+      animation: dp-hero-exit ease-in both;
+      animation-timeline: view();
+      animation-range: exit 0% exit 80%;
+    }
+    /* Posters swing in from alternating sides. */
+    .reveal-tilt-l,
+    .reveal-tilt-r {
+      animation: dp-tilt-l cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 70%;
+    }
+    .reveal-tilt-r {
+      animation-name: dp-tilt-r;
+    }
+    /* Headings slide in from the left. */
+    .reveal-left {
+      animation: dp-slide-left cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 80%;
+    }
+    /* Stagger helpers for lists: later items finish entering a little later. */
+    .reveal-stagger > * {
+      animation: dp-reveal cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 55%;
+    }
+    .reveal-stagger > *:nth-child(3n + 2) {
+      animation-range: entry 8% entry 70%;
+    }
+    .reveal-stagger > *:nth-child(3n + 3) {
+      animation-range: entry 16% entry 85%;
+    }
+  }
+}
+@keyframes dp-grow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes dp-hero-exit {
+  to {
+    opacity: 0.15;
+    transform: translateY(-80px) scale(0.97);
+  }
+}
+@keyframes dp-tilt-l {
+  from {
+    opacity: 0;
+    transform: translate(-32px, 28px) rotate(-4deg);
+  }
+}
+@keyframes dp-tilt-r {
+  from {
+    opacity: 0;
+    transform: translate(32px, 28px) rotate(4deg);
+  }
+}
+@keyframes dp-slide-left {
+  from {
+    opacity: 0;
+    transform: translateX(-28px);
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal,
+    .reveal-tilt-l,
+    .reveal-tilt-r,
+    .reveal-left,
+    .reveal-stagger > *,
+    .hero-exit {
+      will-change: transform, opacity;
+    }
+  }
+}
